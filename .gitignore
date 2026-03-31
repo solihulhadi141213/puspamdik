@@ -1,0 +1,15 @@
+# assets
+assets
+
+# node_modules
+node_modules/.bin
+node_modules/@popperjs
+node_modules/@srexi
+node_modules/aos
+node_modules/bootstrap
+node_modules/bootstrap-icons
+node_modules/classlist-polyfill
+node_modules/lodash.debounce
+node_modules/lodash.throttle
+node_modules/swiper
+node_modules/validate-js
