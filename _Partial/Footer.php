@@ -19,9 +19,9 @@
         <div class="col-lg-3 col-6 footer-links">
             <h4>Halaman Lainnya</h4>
             <ul>
-                <li><a href="index.php?Page=faq">FAQ</a></li>
-                <li><a href="index.php?Page=tos">Terms of service</a></li>
-                <li><a href="index.php?Page=privacy-policy">Privacy policy</a></li>
+                <li><a href="index.php?Page=faq">Frequently Asked Questions</a></li>
+                <li><a href="index.php?Page=tos">Syarat & Ketentuan</a></li>
+                <li><a href="index.php?Page=privacy-policy">Kebijakan Privasi</a></li>
             </ul>
         </div>
 

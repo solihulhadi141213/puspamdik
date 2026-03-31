@@ -18,7 +18,7 @@
     <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
         <div class="contact-main-wrapper">
             <div class="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.31120034801!2d108.51736567379157!3d-6.972563868271689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f16aaf953c4bb%3A0xa0edc117fc5e90b7!2sRSU%20El-Syifa!5e0!3m2!1sid!2sid!4v1774963014243!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
             <div class="contact-content">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <div class="contact-form-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                <!-- <div class="contact-form-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
                     <h3>Hubungi Kami</h3>
                     <p>Silahkan hubungi kami melalui form berikut ini.</p>
                     <form action="forms/contact.php" method="post" class="php-email-form">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
