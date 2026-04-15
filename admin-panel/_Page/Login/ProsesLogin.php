@@ -38,7 +38,7 @@
 
             if ($DataAkses) {
                 $id_akses = $DataAkses["id_akses"];
-                $mode_akses = "Pengurus";
+                $mode_akses = "Admin";
                 $token = generateToken();
 
                 // Hapus token login lama

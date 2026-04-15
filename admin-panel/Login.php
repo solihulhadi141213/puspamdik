@@ -2,11 +2,7 @@
 <html lang="en">
     <head>
         <?php
-            //Koneksi
-            session_start();
-            include "_Config/Connection.php";
-            include "_Config/GlobalFunction.php";
-            include "_Config/SettingGeneral.php";
+            //Head
             include "_Partial/Head.php";
         ?>
     </head>
@@ -17,37 +13,26 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-                                <img src="assets/img/<?php echo $logo;?>" alt="<?php echo $title_page;?>" width="100px">
+                                <img src="assets/img/Logo/logo.png?v=<?php echo $version_code; ?>" alt="Logo" width="100px">
                                 <div class="d-flex justify-content-center py-2">
                                     <p>
                                         <a href="" class="logo d-flex align-items-center w-auto">
-                                            <span class="d-none d-lg-block text-light"><?php echo $title_page;?></span>
+                                            <span class="d-none d-lg-block text-light">Admin Panel</span>
                                         </a>
                                     </p>
                                 </div>
                                 <div class="card mb-3">
                                     <?php
-                                        if(empty($_GET['Page'])){
-                                            include "_Page/Login/Login.php";
-                                        }else{
-                                            $Page=$_GET['Page'];
-                                            if($Page=="LupaPassword"){
-                                                include "_Page/ResetPassword/FormLupaPassword.php";
-                                            }else{
-                                                if($Page=="ResetPassword"){
-                                                    include "_Page/ResetPassword/FormResetPassword.php";
-                                                }
-                                            }
-                                        }
+                                        include "_Page/Login/Login.php";
                                     ?>
                                 </div>
                                 <div class="credits text-center">
                                     <small>
                                         <div class="copyright text-white">
-                                            &copy; Copyright <strong><span><?php echo "$title_page"; ?></span></strong>. All Rights Reserved 2025
+                                            &copy; Copyright <strong><span>AdminPanel</span></strong>. All Rights Reserved 2025
                                         </div>
                                         <div class="credits text-white">
-                                            Designed by <span class="text text-decoration-underline"><?php echo "$AuthorAplikasi"; ?></span>
+                                            Designed by <span class="text text-decoration-underline">Solihul Hadi</span>
                                         </div>
                                     </small>
                                 </div>

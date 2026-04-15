@@ -238,11 +238,22 @@ h6 {
   background: #1c3b67;
 }
 .nav_background {
-  background: rgb(28,59,103);
-  background: linear-gradient(90deg, rgba(28,59,103,1) 0%, rgba(10,40,83,1) 54%, rgba(28,59,103,1) 100%);
+  background: linear-gradient(90deg, #0a0a0f 0%, #1a0f2e 50%, #0a0a0f 100%);
 }
 .landing_background {
-  background: #0d6efd;
+  background: linear-gradient(135deg, #0b0c2a, #1a0f2e, #0d1b3d, #050508);
+  position: relative;
+}
+
+.landing_background::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(111,66,193,0.3), transparent);
+  top: -100px;
+  left: -100px;
+  filter: blur(80px);
 }
 .menu_background {
   background: rgb(35,49,66);

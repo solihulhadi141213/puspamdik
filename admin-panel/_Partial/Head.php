@@ -1,10 +1,3 @@
-<!-- METADATA -->
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>AdminPanel</title>
-<meta content="Aplikasi Pengelolaan Konten Website" name="description">
-<meta content="Website, Konten, CMS" name="keywords">
-
 <?php
     // Menentukan Mode Web
     if($mode_web=="Development"){
@@ -13,6 +6,13 @@
         $version_code = "Production";
     }
 ?>
+
+<!-- METADATA -->
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AdminPanel</title>
+<meta content="Aplikasi Pengelolaan Konten Website" name="description">
+<meta content="Website, Konten, CMS" name="keywords">
 
 <!-- Favicons -->
 <link rel="apple-touch-icon" sizes="57x57" href="assets/img/Icon/apple-icon-57x57.png">

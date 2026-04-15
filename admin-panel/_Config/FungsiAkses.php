@@ -1,13 +1,27 @@
 <?php
-    $SessionNama=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'nama_akses');
-    $SessionKontakAkses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'kontak_akses');
-    $SessionEmailAkses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'email_akses');
-    $SessionGambar=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'image_akses');
-    $SessionLevelAkses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'akses');
-    $SessionDatetimeDaftar=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'datetime_daftar');
-    $SessionDatetimeUpdate=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'datetime_update');
-    $SessionAkses="";
-    if(empty($SessionGambar)){
-        $SessionGambar="No-Image.png";
+    // Default value (antisipasi jika data tidak ada)
+    $SessionNama           = "";
+    $SessionKontakAkses    = "";
+    $SessionEmailAkses     = "";
+    $SessionGambar         = "No-Image.png";
+    $SessionLevelAkses     = "";
+    $SessionDatetimeDaftar = "";
+    $SessionDatetimeUpdate = "";
+
+    // Query ambil semua data sekaligus
+    $query = "SELECT * FROM akses WHERE id_akses = :id LIMIT 1";
+    $stmt  = $Conn->prepare($query);
+    $stmt->execute([':id' => $SessionIdAkses]);
+
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($data) {
+        $SessionNama           = $data['nama_akses'] ?? "";
+        $SessionKontakAkses    = $data['kontak_akses'] ?? "";
+        $SessionEmailAkses     = $data['email_akses'] ?? "";
+        $SessionGambar         = !empty($data['image_akses']) ? $data['image_akses'] : "No-Image.png";
+        $SessionLevelAkses     = $data['akses'] ?? "";
+        $SessionDatetimeDaftar = $data['datetime_daftar'] ?? "";
+        $SessionDatetimeUpdate = $data['datetime_update'] ?? "";
     }
 ?>
