@@ -1,0 +1,12 @@
+{
+    "name": "puspamdik/admin-panel",
+    "description": "Manajmen konten website",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Solihul Hadi"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
