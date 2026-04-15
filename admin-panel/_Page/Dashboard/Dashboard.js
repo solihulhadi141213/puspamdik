@@ -141,38 +141,13 @@ function ShowPopularPost() {
     });
 }
 
-
-// Fungsi untuk menampilkan jam digital
-function tampilkanJam() {
-    const waktu = new Date();
-    let jam = waktu.getHours().toString().padStart(2, '0');
-    let menit = waktu.getMinutes().toString().padStart(2, '0');
-    let detik = waktu.getSeconds().toString().padStart(2, '0');
-
-    $('#jam_menarik').text(`${jam}:${menit}:${detik}`);
-}
-
-// Fungsi untuk menampilkan tanggal
-function tampilkanTanggal() {
-    const waktu = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const tanggal = waktu.toLocaleDateString('id-ID', options);
-    
-    $('#tanggal_menarik').text(tanggal);
-}
-
 //Ketika Halaman Dashboard MunculPertama Kali
 $(document).ready(function () {
     //Menampilkan Data Pertama Kali
     GetDashboardInformation();
     GetGraphData();
     ShowPopularPost();
-    
-    //Jam Menarik
-    tampilkanTanggal(); // Tampilkan tanggal saat halaman dimuat
-    tampilkanJam();     // Tampilkan jam pertama kali
-    setInterval(tampilkanJam, 1000); // Perbarui jam setiap detik
-    setInterval(tampilkanTanggal, 3600000); // Perbarui tanggal setiap jam
+
 
     // Jalankan saat pertama kali halaman dimuat
     togglePeriode();

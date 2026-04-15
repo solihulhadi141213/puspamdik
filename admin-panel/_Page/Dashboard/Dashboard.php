@@ -102,39 +102,41 @@
             </div>
             
             <div class="row">
-                <!-- Reports -->
-                <div class="col-md-8">
-                    <div class="card">
+                <!-- Grafik -->
+                <div class="col-md-8 d-flex">
+                    <div class="card w-100 h-100">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-10">
-                                    <b class="card-title">Grafik Pemirsa</b>
+                                    <b class="card-title"># Grafik Pengunjung</b>
                                 </div>
                                 <div class="col-2 text-end">
-                                    <button type="button" class="btn btn-md btn-secondary btn-floating"  data-bs-toggle="modal" data-bs-target="#ModalFilterGrafik">
+                                    <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilterGrafik">
                                         <i class="bi bi-filter"></i>
                                     </button>
                                 </div>
                             </div>
-                            
                         </div>
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title" id="NamaTitleData"></h5>
-                            <div id="chart"></div>
+                            <div id="chart" class="flex-grow-1"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
+
+                <!-- Popular Post -->
+                <div class="col-md-4 d-flex">
+                    <div class="card w-100 h-100">
                         <div class="card-header">
                             <b class="card-title"># Popular Post</b> 
                         </div>
                         <div class="card-body" id="ShowPopularPost">
-                            <!-- Menampilkan Pemberitahuan Sistem -->
+                            <!-- Konten -->
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </section>

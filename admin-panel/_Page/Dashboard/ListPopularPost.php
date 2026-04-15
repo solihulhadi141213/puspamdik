@@ -1,137 +1,59 @@
 <?php
-    // Koneksi
-    include "../../_Config/Connection.php";
-    include "../../_Config/GlobalFunction.php";
-    include "../../_Config/Session.php";
-    include "../../_Config/SettingKoneksi.php";
-    date_default_timezone_set('Asia/Jakarta');
+    require_once '../../_Config/Connection.php';
 
-    //Cek Sesi x-token
-    if(empty($_SESSION['x-token'])){
-        
-        //Jika belum maka buat/generate
-        $generate_x_token=generate_x_token($base_url, $user_key, $access_key);
+    try {
+        // Ambil koneksi
+        $db = new Database();
+        $Conn = $db->getConnection();
 
-        //Konversi ke arry
-        $generate_x_token_arry=json_decode($generate_x_token,true);
-        if($generate_x_token_arry['status']=='success'){
-            $_SESSION["x-token"] = $generate_x_token_arry['session_token'];
-            $_SESSION["x-expired_at"] = $generate_x_token_arry['expired_at'];
-        }else{
-            $_SESSION["x-token"] = "";
-            $_SESSION["x-expired_at"] ="";
-        }
-    }else{
-        
-        //Jika sudah maka buat dalam bentuk variabel
-        $session_x_token=$_SESSION['x-token'];
-        $session_expired_at=$_SESSION['x-expired_at'];
-        
-        //Validasi x token masih berlaku atau tidak
-        if($session_expired_at<=date('Y-m-d H:i:s')){
-            //Jika belum maka buat/generate
-            $generate_x_token=generate_x_token($base_url, $user_key, $access_key);
+        // Query popular post berdasarkan jumlah viewer
+        $query = "
+            SELECT 
+                b.id_blog,
+                b.title_blog,
+                b.cover,
+                b.datetime_creat,
+                COUNT(v.id_blog) as total_view
+            FROM blog b
+            LEFT JOIN blog_viewer v ON b.id_blog = v.id_blog
+            WHERE b.publish = 1
+            GROUP BY b.id_blog
+            ORDER BY total_view DESC
+            LIMIT 5
+        ";
 
-            //Konversi ke arry
-            $generate_x_token_arry=json_decode($generate_x_token,true);
-            if($generate_x_token_arry['status']=='success'){
-                $_SESSION["x-token"] = $generate_x_token_arry['session_token'];
-                $_SESSION["x-expired_at"] = $generate_x_token_arry['expired_at'];
-            }else{
-                $_SESSION["x-token"] = "";
-                $_SESSION["x-expired_at"] ="";
-            }
-        }
-    }
+        $stmt = $Conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
-    //Validasi X-token Tidak Ada
-    if(empty($_SESSION["x-token"])){
-        echo '
-            <div class="row mb-2">
-                <div class="col-12">
-                    <div class=""alert alert-danger">X-Token Gagal Dibuat!</div>
-                </div>
-            </div>
-        ';
-        exit();
-    }
-    $top=5;
+        if ($result) {
+            foreach ($result as $row) {
+                $title  = htmlspecialchars($row['title_blog']);
+                $cover  = $row['cover'];
+                $date   = date('d M Y', strtotime($row['datetime_creat']));
+                $view   = $row['total_view'];
 
-    //Buat Playload
-    $payload = [
-        "top"   => $top
-    ];
+                // Path cover (sesuaikan dengan folder kamu)
+                $coverPath = "assets/img/Content/Blog/".$cover;
 
-    //Mulai Mengirim Request Ke End Point
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => ''.$base_url.'/_Api/PopularPost.php',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLOPT_SSL_VERIFYHOST => false,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => json_encode($payload, JSON_UNESCAPED_UNICODE),
-        CURLOPT_HTTPHEADER => array(
-            'x-token: '.$_SESSION['x-token'].'',
-            'Content-Type: text/plain'
-        ),
-    ));
-    $response = curl_exec($curl);
-    curl_close($curl);
-
-    //Ubah response jadi arry
-    $response_arry=json_decode($response, true);
-    $status_response=$response_arry['status'];
-
-    //Apabila Status Gagal
-    if($status_response!=="success"){
-        echo '
-            <div class="row mb-2">
-                <div class="col-12">
-                    <div class=""alert alert-danger">'.$response_arry['message'].'</div>
-                </div>
-            </div>
-        ';
-        exit();
-    }else{
-        $data=$response_arry['data'];
-        if(empty(count($data))){
-            echo '
-                <div class="row mb-2">
-                    <div class="col-12">
-                        <div class=""alert alert-danger">Tidak Ada Potingan Yang Ditampilkan</div>
-                    </div>
-                </div>
-            ';
-        }else{
-            foreach ($data as $list) {
-                $id_blog=$list['id_blog'];
-                $title_blog=$list['title_blog'];
-                $datetime_creat=$list['datetime_creat'];
-                $author_blog=$list['author_blog'];
-
-                $tanggal_post=date('d/m/Y H:i', strtotime($datetime_creat));
                 echo '
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <b>
-                                <small>
-                                    <a href="'.$base_url.'/Blog?id='.$id_blog.'" target="_blank">'.$title_blog.'</a>
-                                </small>
-                            </b><br>
-                            <small>
-                                '.$tanggal_post.' - '.$author_blog.'<br>
-
-                            </small>
-                        </div>
+                <div class="d-flex mb-3">
+                    <div style="width:80px; height:60px; overflow:hidden; margin-right:10px;">
+                        <img src="'.$coverPath.'" style="width:100%; height:100%; object-fit:cover;">
                     </div>
-                ';
+                    <div>
+                        <div style="font-weight:bold; font-size:14px;">'.$title.'</div>
+                        <small>'.$date.'</small><br>
+                        <small><i class="fa fa-eye"></i> '.$view.' views</small>
+                    </div>
+                </div>
+                <hr>';
             }
+        } else {
+            echo '<div class="text-center text-muted">Belum ada data popular post</div>';
         }
+
+    } catch (Exception $e) {
+        echo '<div class="text-danger">Error: '.$e->getMessage().'</div>';
     }
 ?>
