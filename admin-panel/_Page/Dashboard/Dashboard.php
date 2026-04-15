@@ -20,16 +20,6 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card" id="card_jam_menarik">
-                        <div class="card-body">
-                            <div id="tanggal_menarik">Hari, 01 Januari 1900</div>
-                            <div id="jam_menarik">00:00:00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
                     <div class="row">
                         <div class="col-xxl-3 col-md-12 col-12">
                             <div class="card info-card sales-card">

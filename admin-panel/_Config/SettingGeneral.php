@@ -26,6 +26,7 @@
     $logo               = $DataSettingGeneral['logo'] ?? null;
     $base_url           = $DataSettingGeneral['base_url'] ?? null;
     $AuthorAplikasi     = $DataSettingGeneral['author'] ?? null;
+    $mode_web           = $DataSettingGeneral['mode_web'] ?? null;
 
     // Tidak perlu close() pada PDO, tapi jika mau aman:
     $stmt = null;

@@ -27,4 +27,4 @@
 <script src="assets/js/jquery.session.js" type="text/javascript"></script>
 
 <!-- MAIN -->
-<script src="assets/js/main.js?V=2"></script>
+<script src="assets/js/main.js?v=<?php echo $version_code; ?>"></script>

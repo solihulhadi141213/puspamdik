@@ -1,7 +1,8 @@
 # ===============================
 # ADMIN PANEL
 # ===============================
-admin-panel/assets/img
+admin-panel/assets/img/Content
+admin-panel/assets/img/User
 admin-panel/vendor
 admin-panel/node_modules
 
