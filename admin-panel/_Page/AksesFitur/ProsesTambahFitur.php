@@ -73,15 +73,7 @@
         $Input = $stmt->execute();
         
         if($Input) {
-            $kategori_log = "Akses";
-            $deskripsi_log = "Input Fitur Akses";
-            $InputLog = addLog($Conn, $SessionIdAkses, $now, $kategori_log, $deskripsi_log);
-            
-            if($InputLog == "Success") {
-                echo '<code class="text-success" id="NotifikasiTambahAksesFiturBerhasil">Success</code>';
-            } else {
-                echo '<code class="text-danger">Terjadi kesalahan pada saat menyimpan Log <br> Ket: '.$InputLog.'</code>';
-            }
+             echo '<code class="text-success" id="NotifikasiTambahAksesFiturBerhasil">Success</code>';
         } else {
             echo '<code class="text-danger">Terjadi kesalahan pada saat menyimpan data</code>';
         }

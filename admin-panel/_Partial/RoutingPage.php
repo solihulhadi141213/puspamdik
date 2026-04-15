@@ -11,7 +11,6 @@
             "Akses"                 =>  "_Page/Akses/Akses.php",
             "SettingGeneral"        =>  "_Page/SettingGeneral/SettingGeneral.php",
             "SettingEmail"          =>  "_Page/SettingEmail/SettingEmail.php",
-            "SettingKoneksiWeb"     =>  "_Page/SettingKoneksiWeb/SettingKoneksiWeb.php",
             "Metatag"               =>  "_Page/Metatag/Metatag.php",
             "Favicon"               =>  "_Page/Favicon/Favicon.php",
             "Navbar"                =>  "_Page/Navbar/Navbar.php",

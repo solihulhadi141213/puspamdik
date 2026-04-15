@@ -13,7 +13,6 @@
             "Akses"                     => "_Page/Akses/Akses.js",
             "SettingGeneral"            => "_Page/SettingGeneral/SettingGeneral.js",
             "SettingEmail"              => "_Page/SettingEmail/SettingEmail.js",
-            "SettingKoneksiWeb"         => "_Page/SettingKoneksiWeb/SettingKoneksiWeb.js",
             "Metatag"                   => "_Page/Metatag/Metatag.js",
             "Favicon"                   => "_Page/Favicon/Favicon.js",
             "Navbar"                    => "_Page/Navbar/Navbar.js",

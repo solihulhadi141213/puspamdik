@@ -135,7 +135,7 @@
                     <td><small>' . $label_jumlah_pengguna . '</small></td>
                     <td>
                         <button type="button" class="btn btn-sm btn-outline-dark btn-floating"  data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-three-dots"></i>
+                            <i class="bi bi-three-dots-vertical"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <li class="dropdown-header text-start"><h6>Option</h6></li>

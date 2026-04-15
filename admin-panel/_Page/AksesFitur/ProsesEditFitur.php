@@ -117,14 +117,6 @@
             }
         }
         
-        // Input log
-        $kategori_log = "Fitur Akses";
-        $deskripsi_log = "Edit Fitur Akses";
-        $InputLog = addLog($Conn, $SessionIdAkses, $now, $kategori_log, $deskripsi_log);
-        
-        if($InputLog != "Success") {
-            throw new Exception("Terjadi kesalahan pada saat menyimpan Log");
-        }
         
         // Commit transaksi jika semua berhasil
         $Conn->commit();

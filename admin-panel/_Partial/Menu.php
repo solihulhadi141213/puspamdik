@@ -58,11 +58,6 @@
                         <i class="bi bi-circle"></i><span>Email Gateway</span>
                     </a>
                 </li> 
-                <li>
-                    <a href="index.php?Page=SettingKoneksiWeb" class="<?php if($PageMenu=="SettingKoneksiWeb"){echo "active";} ?>">
-                        <i class="bi bi-circle"></i><span>Koneksi Web</span>
-                    </a>
-                </li> 
             </ul>
         </li>
         <li class="nav-item">
