@@ -7,14 +7,15 @@
         $Page=$_GET['Page'];
         // Routing Javascript Berdasarkan Halaman
         $scripts = [
-            "MyProfile"                 => "_Page/MyProfile/MyProfile.js",
-            "AksesFitur"                => "_Page/AksesFitur/AksesFitur.js",
-            "AksesEntitas"              => "_Page/AksesEntitas/AksesEntitas.js",
-            "Akses"                     => "_Page/Akses/Akses.js",
-            "SettingGeneral"            => "_Page/SettingGeneral/SettingGeneral.js",
-            "SettingEmail"              => "_Page/SettingEmail/SettingEmail.js",
-            "Hero"                      => "_Page/Hero/Hero.js",
-            "Opening"                   => "_Page/Opening/Opening.js",
+            "MyProfile"      => "_Page/MyProfile/MyProfile.js",
+            "AksesFitur"     => "_Page/AksesFitur/AksesFitur.js",
+            "AksesEntitas"   => "_Page/AksesEntitas/AksesEntitas.js",
+            "Akses"          => "_Page/Akses/Akses.js",
+            "SettingGeneral" => "_Page/SettingGeneral/SettingGeneral.js",
+            "SettingEmail"   => "_Page/SettingEmail/SettingEmail.js",
+            "Hero"           => "_Page/Hero/Hero.js",
+            "Opening"        => "_Page/Opening/Opening.js",
+            "Galeri"         => "_Page/Galeri/Galeri.js",
         ];
 
         // Cek apakah halaman ada dalam daftar dan sertakan file JS yang sesuai
