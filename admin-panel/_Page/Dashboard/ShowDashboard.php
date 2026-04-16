@@ -20,7 +20,7 @@
         $total_hit = $Conn->query("SELECT COUNT(*) FROM visitor_logs")->fetchColumn();
         $total_blog = $Conn->query("SELECT COUNT(*) FROM blog")->fetchColumn();
         $total_laman = $Conn->query("SELECT COUNT(*) FROM laman")->fetchColumn();
-        $total_newslater = $Conn->query("SELECT COUNT(*) FROM newslater")->fetchColumn();
+        $total_newslater = $Conn->query("SELECT COUNT(*) FROM buku")->fetchColumn();
 
         sendResponse([
             'status' => 'success',

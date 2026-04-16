@@ -89,7 +89,7 @@
                                         <!-- Data Info -->
                                         <div>
                                             <div class="d-flex">
-                                                <h5>Newslatter</h5>
+                                                <h5>Buku</h5>
                                             </div>
                                             <h4 class="text-muted" id="total_newslater">-</h4>
                                         </div>
