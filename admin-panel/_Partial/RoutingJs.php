@@ -21,6 +21,7 @@
             "Laman"          => "_Page/Laman/Laman.js",
             "Blog"           => "_Page/Blog/Blog.js",
             "Event"          => "_Page/Event/Event.js",
+            "Testimoni"      => "_Page/Testimoni/Testimoni.js",
             "Buku"           => "_Page/Buku/Buku.js",
         ];
 

@@ -20,6 +20,7 @@
             "Blog"           => "_Page/Blog/ModalBlog.php",
             "Buku"           => "_Page/Buku/ModalBuku.php",
             "Event"          => "_Page/Event/ModalEvent.php",
+            "Testimoni"      => "_Page/Testimoni/ModalTestimoni.php",
         ];
 
         // Cek apakah halaman memiliki modal terkait dan sertakan file modalnya

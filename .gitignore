@@ -10,6 +10,7 @@ admin-panel/assets/img/Content/Opening/*
 admin-panel/assets/img/Content/Pengurus/*
 admin-panel/assets/img/Content/Buku/*
 admin-panel/assets/img/Content/Event/*
+admin-panel/assets/img/Content/Testimoni/*
 admin-panel/assets/img/User/*
 
 
@@ -22,6 +23,7 @@ admin-panel/assets/img/User/*
 !admin-panel/assets/img/Content/Pengurus/.gitkeep
 !admin-panel/assets/img/Content/Buku/.gitkeep
 !admin-panel/assets/img/Content/Event/.gitkeep
+!admin-panel/assets/img/Content/Testimoni/.gitkeep
 !admin-panel/assets/img/User/.gitkeep
 
 
