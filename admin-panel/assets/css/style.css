@@ -1590,3 +1590,10 @@ body .title_page_app {
 .blog-content p{
     margin-bottom: 12px;
 }
+
+/* Blur */
+.loading-blur {
+    filter: blur(3px);
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
+}

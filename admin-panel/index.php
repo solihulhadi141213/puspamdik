@@ -60,6 +60,7 @@
                 include "_Partial/RoutingJs.php";
                 include "_Partial/RoutingSwal.php";
             ?>
+            <div id="ToastContainer" class="position-fixed top-0 end-0 p-3" style="z-index:9999;"></div>
         </div>
     </body>
 </html>

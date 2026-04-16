@@ -20,6 +20,7 @@
             "Pengurus"       => "_Page/Pengurus/Pengurus.js",
             "Laman"          => "_Page/Laman/Laman.js",
             "Blog"           => "_Page/Blog/Blog.js",
+            "Event"          => "_Page/Event/Event.js",
             "Buku"           => "_Page/Buku/Buku.js",
         ];
 

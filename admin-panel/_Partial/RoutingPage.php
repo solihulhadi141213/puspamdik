@@ -19,6 +19,7 @@
             "Laman"          => "_Page/Laman/Laman.php",
             "Blog"           => "_Page/Blog/Blog.php",
             "Buku"           => "_Page/Buku/Buku.php",
+            "Event"          => "_Page/Event/Event.php",
             "Error"          => "_Page/Error/Error.php"
         ];
 
