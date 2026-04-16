@@ -17,6 +17,7 @@
             "VisiMisi"       => "_Page/VisiMisi/VisiMisi.php",
             "Pengurus"       => "_Page/Pengurus/Pengurus.php",
             "Laman"          => "_Page/Laman/Laman.php",
+            "Blog"           => "_Page/Blog/Blog.php",
             "Error"          => "_Page/Error/Error.php"
         ];
 

@@ -1574,3 +1574,19 @@ body .title_page_app {
 .ql-container.ql-snow {
     border-radius: 0 0 0.75rem 0.75rem;
 }
+
+/* BLOG */
+.blog-content{
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.blog-content img{
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.blog-content p{
+    margin-bottom: 12px;
+}

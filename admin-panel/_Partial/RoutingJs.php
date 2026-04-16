@@ -19,6 +19,7 @@
             "VisiMisi"       => "_Page/VisiMisi/VisiMisi.js",
             "Pengurus"       => "_Page/Pengurus/Pengurus.js",
             "Laman"          => "_Page/Laman/Laman.js",
+            "Blog"           => "_Page/Blog/Blog.js",
         ];
 
         // Cek apakah halaman ada dalam daftar dan sertakan file JS yang sesuai
