@@ -16,6 +16,7 @@
             "Hero"           => "_Page/Hero/Hero.js",
             "Opening"        => "_Page/Opening/Opening.js",
             "Galeri"         => "_Page/Galeri/Galeri.js",
+            "VisiMisi"         => "_Page/VisiMisi/VisiMisi.js",
         ];
 
         // Cek apakah halaman ada dalam daftar dan sertakan file JS yang sesuai

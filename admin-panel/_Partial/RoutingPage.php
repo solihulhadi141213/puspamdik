@@ -14,6 +14,7 @@
             "Hero"           => "_Page/Hero/Hero.php",
             "Opening"        => "_Page/Opening/Opening.php",
             "Galeri"         => "_Page/Galeri/Galeri.php",
+            "VisiMisi"         => "_Page/VisiMisi/VisiMisi.php",
             "Error"          => "_Page/Error/Error.php"
         ];
 
