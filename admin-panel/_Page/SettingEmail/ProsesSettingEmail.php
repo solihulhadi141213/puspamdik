@@ -50,19 +50,9 @@
         $stmt->bindParam(':url_service', $url_service);
 
         if($stmt->execute()) {
-            // Input log
-            $kategori_log = "Setting";
-            $deskripsi_log = "Setting Email";
-            $InputLog = addLog($Conn, $SessionIdAkses, $now, $kategori_log, $deskripsi_log);
-            
-            if($InputLog == "Success") {
-                $Conn->commit();
-                $_SESSION["NotifikasiSwal"] = "Simpan Setting Email Berhasil";
-                echo '<span class="text-success" id="NotifikasiSimpanSettingEmailBerhasil">Success</span>';
-            } else {
-                $Conn->rollBack();
-                echo '<small class="text-danger">Terjadi kesalahan pada saat menyimpan Log</small>';
-            }
+            $Conn->commit();
+            $_SESSION["NotifikasiSwal"] = "Simpan Setting Email Berhasil";
+            echo '<span class="text-success" id="NotifikasiSimpanSettingEmailBerhasil">Success</span>';
         } else {
             $Conn->rollBack();
             echo '<span class="text-danger">Save Email Gateway settings Failed</span>';

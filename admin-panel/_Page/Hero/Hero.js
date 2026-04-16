@@ -1,89 +1,346 @@
-$(document).ready(function() {
+//Fungsi Menampilkan List Hero
+function ListHero() {
+    let container = $('#TabelHero');
 
-    //Jika show_button diubah
-    $("#show_button").on("change", function() {
+    container.addClass('hero-loading');
+
+    $.ajax({
+        type: 'POST',
+        url: '_Page/Hero/TabelHero.php',
+        beforeSend: function () {
+            container.html(`
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-4 text-center">
+                                <span class="spinner-border spinner-border-sm"></span>
+                                <span class="ms-2">Memuat data hero...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+        },
+        success: function (data) {
+            setTimeout(() => {
+                container.html(data);
+                container.removeClass('hero-loading');
+            }, 200);
+        },
+        error: function () {
+            container.html(`
+                <div class="alert alert-danger">
+                    Gagal memuat data hero
+                </div>
+            `);
+            container.removeClass('hero-loading');
+        }
+    });
+}
+
+$(document).ready(function () {
+    
+    // Load Data Pertama Kali
+    ListHero();
+
+    // Handle enable / disable tombol link
+    function ToggleTombolHero() {
+        let value = $('#tombol_hero').val();
+
+        if (value === '0') {
+            $('#hero_link, #hero_link_label')
+                .prop('disabled', true)
+                .val('');
+        } else {
+            $('#hero_link, #hero_link_label')
+                .prop('disabled', false);
+        }
+    }
+
+    ToggleTombolHero();
+
+    $(document).on('change', '#tombol_hero', function () {
+        ToggleTombolHero();
+    });
+
+
+    // Handle submit tambah hero
+    $(document).on('submit', '#ProsesTambahHero', function (e) {
+        e.preventDefault();
+
+        let form = $('#ProsesTambahHero')[0];
+        let formData = new FormData(form);
+
+        let button = $('#ButtonTambahHero');
+        let notifikasi = $('#NotifikasiTambahHero');
+        let modal = $('#ModalTambahHero');
+
+        let originalButton = button.html();
+
+        notifikasi.html('');
+
+        button.prop('disabled', true).html(`
+            <span class="spinner-border spinner-border-sm"></span>
+            Menyimpan...
+        `);
+
+        $.ajax({
+            url: '_Page/Hero/ProsesTambahHero.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+
+            success: function (response) {
+
+                if (response.status) {
+
+                    $('#ProsesTambahHero')[0].reset();
+                    ToggleTombolHero();
+
+                    button.prop('disabled', false).html(originalButton);
+
+                    bootstrap.Modal.getInstance(
+                        document.getElementById('ModalTambahHero')
+                    ).hide();
+
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+
+                    ListHero();
+
+                } else {
+                    notifikasi.html(`
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            ${response.message}
+                        </div>
+                    `);
+
+                    button.prop('disabled', false).html(originalButton);
+                }
+            },
+
+            error: function () {
+                notifikasi.html(`
+                    <div class="alert alert-danger">
+                        Terjadi kesalahan server
+                    </div>
+                `);
+
+                button.prop('disabled', false).html(originalButton);
+            }
+        });
+    });
+    // =======================================================
+    // EDIT HERO
+    // =======================================================
+     $('#ModalEditHero').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget);
+        let id = button.data('id');
+
+        let modal = $(this);
+        let formContainer = modal.find('#FormEditHero');
+        let notifikasi = modal.find('#NotifikasiEditHero');
+
+        // Kosongkan notifikasi
+        notifikasi.html('');
+
+        // Loading form
+        formContainer.html(`
+            <div class="p-4 text-center">
+                <div class="spinner-border spinner-border-sm text-primary"></div>
+                <div class="small mt-2 text-secondary">Memuat data hero...</div>
+            </div>
+        `);
+
+        $.ajax({
+            type: 'POST',
+            url: '_Page/Hero/FormEditHero.php',
+            data: {
+                id_hero: id
+            },
+            success: function (response) {
+                formContainer.html(response);
+            },
+            error: function () {
+                formContainer.html(`
+                    <div class="alert alert-danger">
+                        Gagal memuat form edit
+                    </div>
+                `);
+            }
+        });
+    });
+    $(document).on('change', '#edit_tombol_hero', function () {
         let value = $(this).val();
 
-        if (value === "Sembunyikan") {
-            // Kosongkan field
-            $("#button_url").val("").prop("readonly", true);
-            $("#button_label").val("").prop("readonly", true);
+        if (value === '0') {
+            $('#edit_hero_link, #edit_hero_link_label')
+                .prop('disabled', true)
+                .val('');
         } else {
-            // Aktifkan kembali jika "Tampilkan" atau kosong
-            $("#button_url").prop("readonly", false);
-            $("#button_label").prop("readonly", false);
+            $('#edit_hero_link, #edit_hero_link_label')
+                .prop('disabled', false);
         }
     });
 
-    //Proses Tambah Hero/Slider
-    $('#ProsesTambahHero').submit(function(e){
-        e.preventDefault(); // <- penting biar form tidak reload halaman
-        $('#NotifikasiTambahHero').html('<div class="spinner-border text-secondary" role="status"><span class="sr-only"></span></div>');
-        var form = $('#ProsesTambahHero')[0];
-        var data = new FormData(form);
-        $.ajax({
-            type        : 'POST',
-            url         : '_Page/Hero/ProsesTambahHero.php',
-            data        :  data,
-            cache       : false,
-            processData : false,
-            contentType : false,
-            enctype     : 'multipart/form-data',
-            success     : function(data){
-                $('#NotifikasiTambahHero').html(data);
-                var NotifikasiTambahHeroBerhasil=$('#NotifikasiTambahHeroBerhasil').html();
-                if(NotifikasiTambahHeroBerhasil=="Success"){
+    $(document).on('shown.bs.modal', '#ModalEditHero', function () {
+        $('#edit_tombol_hero').trigger('change');
+    });
 
-                    //Tampilkan swal
-                    Swal.fire(
-                        'Success!',
-                        'Tambah Hero/Slider Berhasil!',
-                        'success'
-                    ).then(() => {
-                        location.reload();
+    // Submit Edit Hero
+    $(document).on('submit', '#ProsesEditHero', function (e) {
+        e.preventDefault();
+
+        let form = $('#ProsesEditHero')[0];
+        let formData = new FormData(form);
+
+        let button = $('#ButtonEditHero');
+        let notifikasi = $('#NotifikasiEditHero');
+        let modalEl = document.getElementById('ModalEditHero');
+
+        let originalButton = button.html();
+
+        // Reset notifikasi
+        notifikasi.html('');
+
+        // Loading tombol
+        button.prop('disabled', true).html(`
+            <span class="spinner-border spinner-border-sm"></span>
+            Menyimpan...
+        `);
+
+        $.ajax({
+            url: '_Page/Hero/ProsesEditHero.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+
+            success: function (response) {
+                // Kembalikan tombol
+                button.prop('disabled', false).html(originalButton);
+
+                if (response.status) {
+                    // Tutup modal
+                    bootstrap.Modal.getInstance(modalEl).hide();
+
+                    // Refresh list hero
+                    ListHero();
+
+                    // Toast sukses
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
                     });
 
+                } else {
+                    notifikasi.html(`
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            ${response.message}
+                        </div>
+                    `);
                 }
+            },
+
+            error: function () {
+                button.prop('disabled', false).html(originalButton);
+
+                notifikasi.html(`
+                    <div class="alert alert-danger">
+                        Terjadi kesalahan server
+                    </div>
+                `);
             }
         });
     });
 
-    //Modal Hapus
-    $('#ModalHapusHero').on('show.bs.modal', function (e) {
-        var order = $(e.relatedTarget).data('id');
-        $('#order_hapus').val(order);
-        $('#NotifikasiHapusHero').html("");
+    // ==========================================
+    // HAPUS HERO
+    // ==========================================
+    $('#ModalHapusHero').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget);
+        let id = button.data('id');
+
+        $('#hapus_id_hero').val(id);
+        $('#NotifikasiHapusHero').html('');
     });
 
-    //Proses Hapus
-    $('#ProsesHapusHero').submit(function(e){
-        e.preventDefault(); // <- penting biar form tidak reload halaman
-        $('#NotifikasiHapusHero').html('<div class="spinner-border text-secondary" role="status"><span class="sr-only"></span></div>');
-        var form = $('#ProsesHapusHero')[0];
-        var data = new FormData(form);
+    // Submit Hapus
+    $(document).on('submit', '#ProsesHapusHero', function (e) {
+        e.preventDefault();
+
+        let form = $(this);
+        let button = $('#ButtonHapusHero');
+        let notifikasi = $('#NotifikasiHapusHero');
+        let modalEl = document.getElementById('ModalHapusHero');
+
+        let originalButton = button.html();
+
+        notifikasi.html('');
+
+        button.prop('disabled', true).html(`
+            <span class="spinner-border spinner-border-sm"></span>
+            Menghapus...
+        `);
+
         $.ajax({
-            type        : 'POST',
-            url         : '_Page/Hero/ProsesHapusHero.php',
-            data        :  data,
-            cache       : false,
-            processData : false,
-            contentType : false,
-            enctype     : 'multipart/form-data',
-            success     : function(data){
-                $('#NotifikasiHapusHero').html(data);
-                var NotifikasiHapusHeroBerhasil=$('#NotifikasiHapusHeroBerhasil').html();
-                if(NotifikasiHapusHeroBerhasil=="Success"){
-                    $('#ModalHapusHero').modal('hide');
-                    Swal.fire(
-                        'Success!',
-                        'Hapus Slider/Hero Berhasil!',
-                        'success'
-                    ).then(() => {
-                        location.reload();
+            url: '_Page/Hero/ProsesHapusHero.php',
+            type: 'POST',
+            data: form.serialize(),
+            dataType: 'json',
+
+            success: function (response) {
+                button.prop('disabled', false).html(originalButton);
+
+                if (response.status) {
+                    bootstrap.Modal.getInstance(modalEl).hide();
+
+                    ListHero();
+
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
                     });
 
+                } else {
+                    notifikasi.html(`
+                        <div class="alert alert-danger">
+                            ${response.message}
+                        </div>
+                    `);
                 }
+            },
+
+            error: function () {
+                button.prop('disabled', false).html(originalButton);
+
+                notifikasi.html(`
+                    <div class="alert alert-danger">
+                        Terjadi kesalahan server
+                    </div>
+                `);
             }
         });
     });
+    
 });

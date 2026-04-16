@@ -8,7 +8,7 @@
     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
         <li class="dropdown-header">
             <h6><?php echo $SessionNama;?></h6>
-            <span><?php echo $SessionAkses;?></span>
+            <span><?php echo $SessionLevelAkses;?></span>
         </li>
         <?php
             echo '<li>';
