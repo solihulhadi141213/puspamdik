@@ -22,6 +22,12 @@
     $alamat_bisnis      = $DataSettingGeneral['alamat_bisnis'] ?? null;
     $email_bisnis       = $DataSettingGeneral['email_bisnis'] ?? null;
     $telepon_bisnis     = $DataSettingGeneral['telepon_bisnis'] ?? null;
+    $google_map         = $DataSettingGeneral['google_map'] ?? null;
+    $medsos_wa          = $DataSettingGeneral['medsos_wa'] ?? null;
+    $medsos_ig          = $DataSettingGeneral['medsos_ig'] ?? null;
+    $medsos_fb          = $DataSettingGeneral['medsos_fb'] ?? null;
+    $medsos_x           = $DataSettingGeneral['medsos_x'] ?? null;
+    $medsos_tiktok      = $DataSettingGeneral['medsos_tiktok'] ?? null;
     $favicon            = $DataSettingGeneral['favicon'] ?? null;
     $logo               = $DataSettingGeneral['logo'] ?? null;
     $base_url           = $DataSettingGeneral['base_url'] ?? null;

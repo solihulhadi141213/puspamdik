@@ -28,122 +28,150 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <form action="javascript:void(0);" id="ProsesSettingGeneral">
-                <div class="card">
-                    <div class="card-header">
-                        <b class="card-title">Form Pengaturan Umum</b>
+            <form action="javascript:void(0);" id="ProsesSettingGeneral" enctype="multipart/form-data">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-header bg-white border-bottom">
+                        <h5 class="mb-0 fw-semibold">
+                            <i class="bi bi-gear text-primary me-2"></i>
+                            Pengaturan Website
+                        </h5>
+                        <small class="text-muted">
+                            Kelola identitas website, kontak, media sosial dan branding
+                        </small>
                     </div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="title_page">Judul/Nama Perusahaan</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" name="title_page" id="title_page" class="form-control" placeholder="Koperasi Andalan Jaya" value="<?php echo "$title_page"; ?>">
-                                <small>Maksimal 20 karakter</small>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="kata_kunci">Kata Kunci</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" name="kata_kunci" id="kata_kunci" class="form-control" value="<?php echo "$kata_kunci"; ?>">
-                                <small>(Contoh: keyword1, keyword2, keyword3)</small>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="deskripsi">Deskripsi</label>
-                            </div>
-                            <div class="col-md-9">
-                                <textarea name="deskripsi" id="deskripsi" cols="30" rows="3" class="form-control"><?php echo "$deskripsi"; ?></textarea>
-                                <small>Menjelaskan gambaran umum aplikasi ini</small>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="alamat_bisnis">Alamat/Kantor</label>
-                            </div>
-                            <div class="col-md-9">
-                                <textarea name="alamat_bisnis" id="alamat_bisnis" cols="30" rows="3" class="form-control"><?php echo "$alamat_bisnis"; ?></textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="email">Email Perusahaan</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="email" name="email_bisnis" id="email_bisnis" class="form-control" placeholder="email@domain.com" value="<?php echo "$email_bisnis"; ?>">
+
+                    <div class="card-body p-4">
+
+                        <!-- INFORMASI WEBSITE -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-primary mb-3">Informasi Website</h6>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nama Website</label>
+                                    <input type="text" name="title_page" id="title_page"
+                                        class="form-control rounded-3"
+                                        maxlength="20"
+                                        value="<?= htmlspecialchars($title_page ?? '') ?>">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Author</label>
+                                    <input type="text" name="author" id="author"
+                                        class="form-control rounded-3"
+                                        value="<?= htmlspecialchars($AuthorAplikasi ?? '') ?>">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Kata Kunci</label>
+                                    <input type="text" name="kata_kunci" id="kata_kunci"
+                                        class="form-control rounded-3"
+                                        value="<?= htmlspecialchars($kata_kunci ?? '') ?>">
+                                    <small class="text-muted">Pisahkan dengan tanda koma</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Deskripsi</label>
+                                    <textarea name="deskripsi" id="deskripsi"
+                                        class="form-control rounded-3"
+                                        rows="3"><?= htmlspecialchars($deskripsi ?? '') ?></textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="telepon_bisnis">Nomor Telepon</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" name="telepon_bisnis" id="telepon_bisnis" class="form-control" placeholder="+62" value="<?php echo "$telepon_bisnis"; ?>">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="favicon">File Favicon</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="file" name="favicon" id="favicon" class="form-control">
-                                <small>
-                                    Maksimal File 2 Mb (JPG, JPEG, PNG and GIF)
-                                    <?php
-                                        if(!empty($favicon)){
-                                            echo '<a href="assets/img/'.$favicon.'" target="_blank">View Image Here</a>';
-                                        }
-                                    ?>
-                                </small>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="logo">Logo Image</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="file" name="logo" id="logo" class="form-control">
-                                <small>
-                                    Maksimal File 2 Mb (JPG, JPEG, PNG and GIF)
-                                    <?php
-                                        if(!empty($logo)){
-                                            echo '<a href="assets/img/'.$logo.'" target="_blank">View Image Here</a>';
-                                        }
-                                    ?>
-                                </small>
+
+                        <!-- KONTAK -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-primary mb-3">Kontak Perusahaan</h6>
+
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">Alamat</label>
+                                    <textarea name="alamat_bisnis" id="alamat_bisnis"
+                                        class="form-control rounded-3"
+                                        rows="3"><?= htmlspecialchars($alamat_bisnis ?? '') ?></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="email_bisnis" id="email_bisnis"
+                                        class="form-control rounded-3"
+                                        value="<?= htmlspecialchars($email_bisnis ?? '') ?>">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Telepon</label>
+                                    <input type="text" name="telepon_bisnis" id="telepon_bisnis"
+                                        class="form-control rounded-3"
+                                        value="<?= htmlspecialchars($telepon_bisnis ?? '') ?>">
+                                </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="base_url">Base URL</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" name="base_url" id="base_url" class="form-control" placeholder="https://" value="<?php echo "$base_url"; ?>">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="author">Author Aplikasi</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" name="author" id="author" class="form-control" value="<?php echo "$AuthorAplikasi"; ?>">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                            </div>
-                            <div class="col-md-9 text-right" id="NotifikasiSimpanSettingGeneral">
-                                <small class="text-dark">Pastikan pengaturan yang anda gunakan sudah sesuai.</small>
+
+                        <!-- MEDIA SOSIAL -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-primary mb-3">Media Sosial</h6>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" name="medsos_wa" class="form-control rounded-3" placeholder="Whatsapp" value="<?= htmlspecialchars($medsos_wa ?? '') ?>">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="url" name="medsos_ig" class="form-control rounded-3" placeholder="Instagram URL" value="<?= htmlspecialchars($medsos_ig ?? '') ?>">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="url" name="medsos_fb" class="form-control rounded-3" placeholder="Facebook URL" value="<?= htmlspecialchars($medsos_fb ?? '') ?>">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="url" name="medsos_x" class="form-control rounded-3" placeholder="X / Twitter URL" value="<?= htmlspecialchars($medsos_x ?? '') ?>">
+                                </div>
                             </div>
                         </div>
+
+                        <div class="col-md-12 mb-4">
+                            <label class="form-label">Google Map</label>
+                            <textarea name="google_map" id="google_map"
+                                class="form-control rounded-3"
+                                rows="3"><?= htmlspecialchars($google_map ?? '') ?></textarea>
+                        </div>
+
+                        <!-- BRANDING -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-primary mb-3">Branding</h6>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label>Favicon</label>
+                                    <input type="file" name="favicon" class="form-control rounded-3">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Logo</label>
+                                    <input type="file" name="logo" class="form-control rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="base_url" class="form-label">Base URL</label>
+                            <input 
+                                type="url" 
+                                name="base_url" 
+                                id="base_url"
+                                class="form-control rounded-3"
+                                placeholder="https://example.com"
+                                value="<?= htmlspecialchars($base_url ?? '') ?>"
+                                required
+                            >
+                            <small class="text-muted">
+                                Contoh: https://domainanda.com
+                            </small>
+                        </div>
+
+                        <div id="NotifikasiSimpanSettingGeneral"></div>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-md btn-primary btn-rounded">
-                            <i class="bi bi-save"></i> Simpan Pengaturan
+
+                    <div class="card-footer bg-white">
+                        <button type="submit" class="btn btn-primary rounded-pill px-4" id="ButtonSettingGeneral">
+                            <i class="bi bi-save me-2"></i>Simpan Pengaturan
                         </button>
                     </div>
                 </div>

@@ -38,13 +38,13 @@
             'id' => 'layout-nav',
             'icon' => 'bi-columns',
             'label' => 'Layout',
-            'pages' => ['Hero', 'Opening', 'Galeri', 'MediaSosial', 'VisiMisi'],
+            'pages' => ['Hero', 'Opening', 'Galeri', 'VisiMisi', 'Pengurus'],
             'children' => [
                 ['page' => 'Hero', 'label' => 'Hero/Slider'],
                 ['page' => 'Opening', 'label' => 'Opening'],
                 ['page' => 'Galeri', 'label' => 'Galeri'],
                 ['page' => 'VisiMisi', 'label' => 'Visi Misi'],
-                ['page' => 'MediaSosial', 'label' => 'Media Sosial']
+                ['page' => 'Pengurus', 'label' => 'Pengurus']
             ]
         ],
         [
