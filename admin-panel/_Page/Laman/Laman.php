@@ -1,18 +1,51 @@
 <?php
-    //Cek Aksesibilitas ke halaman ini
-    $IjinAksesSaya=IjinAksesSaya($Conn,$SessionIdAkses,'t15FiRT4STK6EWW8aLC');
+    $IjinAksesSaya=IjinAksesSaya($Conn,$SessionIdAkses,'pBB9mGcl7DBaSkynA75');
     if($IjinAksesSaya!=="Ada"){
         include "_Page/Error/NoAccess.php";
     }else{
-        if(empty($_GET['Sub'])){
-            include "_Page/Laman/LamanHome.php";
-        }else{
-            $Sub=$_GET['Sub'];
-            if($Sub=="DetailLaman"){
-                include "_Page/Laman/DetailLaman.php";
-            }else{
-                include "_Page/Laman/LamanHome.php";
-            }
-        }
-    }
 ?>
+    <div class="pagetitle">
+        <h1>
+            <a href="">
+                <i class="bi bi-paperclip"></i> Laman</a>
+            </a>
+        </h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                <li class="breadcrumb-item active">Laman</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <small>
+                        Berikut ini adalah halaman untuk mengelola daftar Laman pada website. 
+                        Pada halaman ini anda bisa menambahkan Laman secara dinamis.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <button type="button" class="btn btn-md btn-block btn-primary" data-bs-toggle="modal" data-bs-target="#ModalTambahLaman">
+                    <i class="bi bi-plus"></i> Tambah Laman
+                </button>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <div id="TabelLaman" class="Galeri-container">
+                    <div class="text-center p-5 border border-4 border-secondary rounded-4">
+                        <h1 class="text-dark">
+                            <i class="bi bi-exclamation-circle"></i>
+                        </h1>
+                        Tidak Ada Data Yang Ditemukan
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php } ?>

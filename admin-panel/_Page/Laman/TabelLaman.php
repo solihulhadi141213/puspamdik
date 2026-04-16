@@ -1,214 +1,138 @@
 <?php
     include "../../_Config/Connection.php";
-    include "../../_Config/GlobalFunction.php";
-    include "../../_Config/Session.php";
-    include "../../_Config/SettingKoneksi.php";
-    date_default_timezone_set('Asia/Jakarta');
-    $now = date('Y-m-d H:i:s');
 
-    //Sesi Akses
-    if (empty($SessionIdAkses)) {
-        echo '
-            <tr>
-                <td colspan="6" align="center">
-                    <small class="text-danger">Sesi Akses Sudah Berakhir, Silahkan Login Ulang!</small>
-                </td>
-            </tr>
-        ';
-        exit;
-    }
-    
-    //Cek Sesi x-token
-    if(empty($_SESSION['x-token'])){
-        
-        //Jika belum maka buat/generate
-        $generate_x_token=generate_x_token($base_url, $user_key, $access_key);
+    try {
+        $query = "
+            SELECT 
+                id_laman,
+                judul_laman,
+                kategori_laman,
+                date_laman,
+                cover_laman
+            FROM laman
+            ORDER BY date_laman DESC
+        ";
 
-        //Konversi ke arry
-        $generate_x_token_arry=json_decode($generate_x_token,true);
-        if($generate_x_token_arry['status']=='success'){
-            $_SESSION["x-token"] = $generate_x_token_arry['session_token'];
-            $_SESSION["x-expired_at"] = $generate_x_token_arry['expired_at'];
-        }else{
-            $_SESSION["x-token"] = "";
-            $_SESSION["x-expired_at"] ="";
-        }
-    }else{
-        //Jika sudah maka buat dalam bentuk variabel
-        $session_x_token=$_SESSION['x-token'];
-        $session_expired_at=$_SESSION['x-expired_at'];
-        
-        //Validasi x token masih berlaku atau tidak
-        if($session_expired_at<=date('Y-m-d H:i:s')){
-            //Jika belum maka buat/generate
-            $generate_x_token=generate_x_token($base_url, $user_key, $access_key);
+        $stmt = $Conn->prepare($query);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            //Konversi ke arry
-            $generate_x_token_arry=json_decode($generate_x_token,true);
-            if($generate_x_token_arry['status']=='success'){
-                $_SESSION["x-token"] = $generate_x_token_arry['session_token'];
-                $_SESSION["x-expired_at"] = $generate_x_token_arry['expired_at'];
-            }else{
-                $_SESSION["x-token"] = "";
-                $_SESSION["x-expired_at"] ="";
-            }
-        }
-    }
-    if(empty($_SESSION["x-token"])){
-        echo '
-            <tr>
-                <td colspan="6" align="center">
-                    <small class="text-danger">X-Token Gagal Dibuat!</small>
-                </td>
-            </tr>
-        ';
-        exit();
-    }
-
-    // Ambil parameter
-    $keyword_by = !empty($_POST['keyword_by']) ? $_POST['keyword_by'] : "";
-    $keyword    = !empty($_POST['keyword']) ? $_POST['keyword'] : "";
-    $batas      = !empty($_POST['batas']) ? $_POST['batas'] : 10;
-    $page       = !empty($_POST['page']) ? $_POST['page'] : 1;
-    $ShortBy    = !empty($_POST['ShortBy']) ? $_POST['ShortBy'] : "DESC";
-    $OrderBy    = !empty($_POST['OrderBy']) ? $_POST['OrderBy'] : "datetime_laman";
-    
-    if($keyword_by=="publish"){
-        if(empty($keyword)){
-            $keyword="0";
-        }
-    }
-    //Posisi Sekarang
-    $posisi     = ($page - 1) * $batas;
-
-    $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => ''.$base_url.'/_Api/ListLaman.php',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLOPT_SSL_VERIFYHOST => false,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>'{
-            "order_by":"'.$OrderBy.'",
-            "short_by":"'.$ShortBy.'",
-            "keyword_by":"'.$keyword_by.'",
-            "keyword":"'.$keyword.'",
-            "limit":'.$batas.',
-            "page":'.$page.'
-        }',
-        CURLOPT_HTTPHEADER => array(
-            'x-token: '.$_SESSION["x-token"].'',
-            'Content-Type: text/plain'
-        ),
-    ));
-
-    $response = curl_exec($curl);
-    if($response === false){
-        // Kalau cURL gagal total
-        $error_msg = curl_error($curl);
-        curl_close($curl);
-        echo '
-            <tr>
-                <td colspan="6" align="center">
-                    <small class="text-danger">cURL Error: '.$error_msg.'</small>
-                </td>
-            </tr>
-        ';
-        exit();
-    }
-    curl_close($curl);
-
-    $response_arry=json_decode($response, true);
-
-    if(empty($response_arry['status'])){
-         echo '
-            <tr>
-                <td colspan="6" align="center">
-                    <small class="text-danger">CURL Error: '.$response.'</small>
-                </td>
-            </tr>
-        ';
-        exit();
-    }
-    //Apabila Response Status Gagal
-    if($response_arry['status']!=="success"){
-        echo '
-            <tr>
-                <td colspan="6" align="center">
-                    <small class="text-danger">Response : '.$response_arry['message'].'</small>
-                </td>
-            </tr>
-        ';
-    }else{
-        //Jika Berhasil
-        $JmlHalaman=$response_arry['pagination']['total_pages'];
-        $data=$response_arry['data'];
-
-        $no=1;
-        foreach($data as $list){
-            $id_laman=$list['id_laman'];
-            $judul_laman=$list['judul_laman'];
-            $kategori_laman=$list['kategori_laman'];
-            $datetime_laman=$list['datetime_laman'];
-            $deskripsi=$list['deskripsi'];
-            $author=$list['author'];
-            $cover_url=$list['cover_url'];
-
-            //Tampilkan Baris Tabel
+        if (empty($rows)) {
             echo '
-                <tr>
-                    <td align="center"><small>'.$no.'</small></td>
-                    <td align="left"><small>'.date('d F Y', strtotime($datetime_laman)).'</small></td>
-                    <td align="left">
-                        <small>
-                            <a href="index.php?Page=Laman&Sub=DetailLaman&id=' . $id_laman . '" class="text text-decoration-underline">
-                                '.$judul_laman.'
-                            </a>
-                        </small>
-                    </td>
-                    <td align="left"><small>'.$author.'</small></td>
-                    <td align="left"><small>'.$kategori_laman.'</small></td>
-                    <td align="left">
-                        <a class="btn btn-sm btn-outline-dark btn-floating" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-three-dots"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Option</h6>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="index.php?Page=Laman&Sub=DetailLaman&id=' . $id_laman . '">
-                                    <i class="bi bi-info-circle"></i> Detail
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalEdit" data-id="' . $id_laman . '" data-mode="Refresh">
-                                    <i class="bi bi-pencil"></i> Edit
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalHapus" data-id="' . $id_laman . '" data-mode="Refresh">
-                                    <i class="bi bi-x"></i> Hapus
-                                </a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            ';
-            $no++;
+            <div class="text-center p-5 border border-4 border-secondary rounded-4 bg-white">
+                <h1 class="text-secondary mb-3">
+                    <i class="bi bi-journal-x"></i>
+                </h1>
+                <div class="fw-semibold">Belum ada data laman</div>
+                <small class="text-muted">Silakan tambahkan laman baru</small>
+            </div>';
+            exit;
         }
+
+        echo '<div class="row g-4">';
+
+        foreach ($rows as $row) {
+            $id_laman       = htmlspecialchars($row['id_laman'] ?? '');
+            $judul_laman    = htmlspecialchars($row['judul_laman'] ?? '');
+            $kategori_laman = htmlspecialchars($row['kategori_laman'] ?? '');
+            $cover_laman    = htmlspecialchars($row['cover_laman'] ?? '');
+            $tanggal        = date('d M Y', strtotime($row['date_laman']));
+
+            // PATH COVER SESUAI FOLDER BARU
+            $coverPath = "assets/img/Content/Laman/" . $cover_laman;
+
+            echo '
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden gallery-card">
+
+                    <!-- Cover -->
+                    <div class="position-relative">
+                        <a href="javascript:void(0)"
+                           data-bs-toggle="modal"
+                           data-bs-target="#ModalDetailLaman"
+                           data-id="' . $id_laman . '">
+                            <img
+                                src="' . $coverPath . '"
+                                class="card-img-top"
+                                alt="' . $judul_laman . '"
+                                style="height:220px; width:100%; object-fit:cover;"
+                                onerror="this.src=\'assets/img/no-image.png\'"
+                            >
+                        </a>
+
+                        <!-- Option Button -->
+                        <div class="position-absolute top-0 end-0 p-3">
+                            <div class="dropdown">
+                                <button
+                                    class="btn btn-md btn-floating btn-light shadow-sm rounded-circle"
+                                    data-bs-toggle="dropdown"
+                                    type="button"
+                                >
+                                    <i class="bi bi-three-dots-vertical text-secondary"></i>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-menu-end border-0 shadow rounded-4">
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="javascript:void(0);"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#ModalEditLaman"
+                                            data-id="' . $id_laman . '"
+                                        >
+                                            <i class="bi bi-pencil me-2"></i>Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item text-danger"
+                                            href="javascript:void(0);"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#ModalHapusLaman"
+                                            data-id="' . $id_laman . '"
+                                        >
+                                            <i class="bi bi-trash me-2"></i>Hapus
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <span class="badge bg-primary rounded-pill px-3 py-2">
+                                ' . $kategori_laman . '
+                            </span>
+                        </div>
+
+                        <h6 class="fw-bold mb-2 text-dark" style="
+                            display:-webkit-box;
+                            -webkit-line-clamp:2;
+                            -webkit-box-orient:vertical;
+                            overflow:hidden;
+                            min-height:48px;
+                        ">
+                            ' . $judul_laman . '
+                        </h6>
+
+                        <div class="d-flex justify-content-between small text-secondary mt-3">
+                            <span>
+                                <i class="bi bi-calendar3"></i> ' . $tanggal . '
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>';
+        }
+
+        echo '</div>';
+
+    } catch (PDOException $e) {
+        echo '
+        <div class="alert alert-danger rounded-4">
+            <b>Database Error:</b> ' . htmlspecialchars($e->getMessage()) . '
+        </div>';
     }
 ?>
-<script>
-    var page_count = <?php echo $JmlHalaman; ?>;
-    var curent_page = <?php echo $page; ?>;
-    $('#page_info').html('Page ' + curent_page + ' Of ' + page_count);
-    $('#prev_button').prop('disabled', curent_page === 1);
-    $('#next_button').prop('disabled', curent_page >= page_count);
-</script>

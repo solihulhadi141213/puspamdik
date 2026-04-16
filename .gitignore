@@ -1,8 +1,25 @@
 # ===============================
 # ADMIN PANEL
 # ===============================
-admin-panel/assets/img/Content
-admin-panel/assets/img/User
+# Ignore semua isi folder
+admin-panel/assets/img/Content/Blog/*
+admin-panel/assets/img/Content/Galeri/*
+admin-panel/assets/img/Content/Hero/*
+admin-panel/assets/img/Content/Laman/*
+admin-panel/assets/img/Content/Opening/*
+admin-panel/assets/img/Content/Pengurus/*
+admin-panel/assets/img/User/*
+
+# Kecuali file placeholder
+!admin-panel/assets/img/Content/Blog/.gitkeep
+!admin-panel/assets/img/Content/Galeri/.gitkeep
+!admin-panel/assets/img/Content/Hero/.gitkeep
+!admin-panel/assets/img/Content/Laman/.gitkeep
+!admin-panel/assets/img/Content/Opening/.gitkeep
+!admin-panel/assets/img/Content/Pengurus/.gitkeep
+!admin-panel/assets/img/User/.gitkeep
+
+
 admin-panel/vendor
 admin-panel/node_modules
 

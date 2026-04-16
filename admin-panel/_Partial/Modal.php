@@ -16,6 +16,7 @@
             "Opening"        => "_Page/Opening/ModalOpening.php",
             "Galeri"         => "_Page/Galeri/ModalGaleri.php",
             "Pengurus"       => "_Page/Pengurus/ModalPengurus.php",
+            "Laman"          => "_Page/Laman/ModalLaman.php",
         ];
 
         // Cek apakah halaman memiliki modal terkait dan sertakan file modalnya
