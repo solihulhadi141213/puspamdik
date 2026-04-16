@@ -11,21 +11,8 @@
             "Akses"                 =>  "_Page/Akses/Akses.php",
             "SettingGeneral"        =>  "_Page/SettingGeneral/SettingGeneral.php",
             "SettingEmail"          =>  "_Page/SettingEmail/SettingEmail.php",
-            "Metatag"               =>  "_Page/Metatag/Metatag.php",
-            "Favicon"               =>  "_Page/Favicon/Favicon.php",
-            "Navbar"                =>  "_Page/Navbar/Navbar.php",
-            "Menu"                  =>  "_Page/Menu/Menu.php",
             "Hero"                  =>  "_Page/Hero/Hero.php",
-            "KontakAlamat"          =>  "_Page/KontakAlamat/KontakAlamat.php",
-            "MediaSosial"           =>  "_Page/MediaSosial/MediaSosial.php",
-            "TautanLain"            =>  "_Page/TautanLain/TautanLain.php",
-            "VisiMisi"              =>  "_Page/VisiMisi/VisiMisi.php",
-            "GoogleMap"             =>  "_Page/GoogleMap/GoogleMap.php",
-            "BlogList"              =>  "_Page/BlogList/BlogList.php",
-            "Laman"                 =>  "_Page/Laman/Laman.php",
-            "Newslater"             =>  "_Page/Newslater/Newslater.php",
-            "Help"                  =>  "_Page/Help/Help.php",
-            "Aktivitas"             =>  "_Page/Aktivitas/Aktivitas.php",
+            "Opening"               =>  "_Page/Opening/Opening.php",
             "Error"                 =>  "_Page/Error/Error.php"
         ];
 

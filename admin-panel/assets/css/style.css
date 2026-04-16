@@ -1548,3 +1548,29 @@ body .title_page_app {
     font-size: .85rem;
     font-weight: 500;
 }
+
+/* OPENIGN CONTENT */
+.upload-box {
+    min-height: 220px;
+    border: 2px dashed #b6b8ff;
+    border-radius: 1rem;
+    background: #f8f9ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.upload-box:hover {
+    border-color: #6f42c1;
+    background: #f5f0ff;
+}
+
+.ql-toolbar.ql-snow {
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.ql-container.ql-snow {
+    border-radius: 0 0 0.75rem 0.75rem;
+}

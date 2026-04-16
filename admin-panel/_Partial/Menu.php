@@ -38,10 +38,11 @@
             'id' => 'layout-nav',
             'icon' => 'bi-columns',
             'label' => 'Layout',
-            'pages' => ['Hero', 'KontakAlamat', 'MediaSosial', 'VisiMisi'],
+            'pages' => ['Hero', 'Opening', 'Galeri', 'MediaSosial', 'VisiMisi'],
             'children' => [
                 ['page' => 'Hero', 'label' => 'Hero/Slider'],
-                ['page' => 'KontakAlamat', 'label' => 'Kontak & Alamat'],
+                ['page' => 'Opening', 'label' => 'Opening'],
+                ['page' => 'Galeri', 'label' => 'Galeri'],
                 ['page' => 'VisiMisi', 'label' => 'Visi Misi'],
                 ['page' => 'MediaSosial', 'label' => 'Media Sosial']
             ]
