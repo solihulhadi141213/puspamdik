@@ -18,6 +18,7 @@
             "Pengurus"       => "_Page/Pengurus/Pengurus.php",
             "Laman"          => "_Page/Laman/Laman.php",
             "Blog"           => "_Page/Blog/Blog.php",
+            "Buku"           => "_Page/Buku/Buku.php",
             "Error"          => "_Page/Error/Error.php"
         ];
 

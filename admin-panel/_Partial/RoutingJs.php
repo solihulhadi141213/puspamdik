@@ -20,6 +20,7 @@
             "Pengurus"       => "_Page/Pengurus/Pengurus.js",
             "Laman"          => "_Page/Laman/Laman.js",
             "Blog"           => "_Page/Blog/Blog.js",
+            "Buku"           => "_Page/Buku/Buku.js",
         ];
 
         // Cek apakah halaman ada dalam daftar dan sertakan file JS yang sesuai

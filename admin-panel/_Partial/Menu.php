@@ -52,11 +52,11 @@
             'id' => 'posting-nav',
             'icon' => 'bi-newspaper',
             'label' => 'Posting',
-            'pages' => ['Laman', 'Blog', 'Label', 'Event', 'Testimoni'],
+            'pages' => ['Laman', 'Blog', 'Buku', 'Event', 'Testimoni'],
             'children' => [
                 ['page' => 'Laman', 'label' => 'Laman'],
                 ['page' => 'Blog', 'label' => 'Blog'],
-                ['page' => 'Label', 'label' => 'Buku'],
+                ['page' => 'Buku', 'label' => 'Buku'],
                 ['page' => 'Event', 'label' => 'Event'],
                 ['page' => 'Testimoni', 'label' => 'Testimoni']
             ]
